@@ -6,7 +6,11 @@ import Pagination from '@/app/ui/invoices/pagination';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 
-export default async function InvoicesPage({ searchParams }: { searchParams?: Promise<any> }) {
+export default async function InvoicesPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ query?: string; page?: string }>;
+}) {
   const params = await searchParams;
   const query = params?.query || '';
   const currentPage = Number(params?.page) || 1;
