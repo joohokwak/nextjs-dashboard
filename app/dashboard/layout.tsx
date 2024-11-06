@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen sm:flex-col">
       <SideNav />
-      <div className="p-12 grow border sm:p-6">{children}</div>
+      <div className="p-12 grow border sm:p-3">{children}</div>
     </div>
   );
 }
