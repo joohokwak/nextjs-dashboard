@@ -11,9 +11,10 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
-
-    if (term) params.set('query', term);
-    else params.delete('query');
+    // 검색어 입력시 페이지 번호 초기화
+    params.delete('page');
+    // 빈칸인경우 삭제
+    term ? params.set('query', term) : params.delete('query');
 
     // console.log(params.toString());
     replace(`${pathname}?${params.toString()}`);

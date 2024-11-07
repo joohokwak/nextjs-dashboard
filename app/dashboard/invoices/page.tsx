@@ -5,15 +5,20 @@ import Table from '@/app/ui/invoices/table';
 import Pagination from '@/app/ui/invoices/pagination';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
+import { fetchInvoicesPages } from '@/app/lib/data';
 
 export default async function InvoicesPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ query?: string; page?: string }>;
+  searchParams?: Promise<{ query?: string; page?: number }>;
 }) {
-  const params = await searchParams;
-  const query = params?.query || '';
-  const currentPage = Number(params?.page) || 1;
+  const { query = '', page = 1 } = (await searchParams) || {};
+  const currentPage = Number(page);
+  // const param = await searchParams;
+  // const query = param?.query || '';
+  // const currentPage = Number(param?.page) || 1;
+
+  const totalPages = await fetchInvoicesPages(query);
 
   return (
     <div>
@@ -25,7 +30,9 @@ export default async function InvoicesPage({
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
-      <div className="mt-5 flex w-full justify-center">{/* <Pagination totalPages={totalPages} /> */}</div>
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
     </div>
   );
 }
