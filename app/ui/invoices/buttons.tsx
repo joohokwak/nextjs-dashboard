@@ -25,16 +25,10 @@ export function UpdateInvoice({ id }: { id: string }) {
 
 export function DeleteInvoice({ id }: { id: string }) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // 기본 폼 제출 동작 방지
+    event.preventDefault();
 
     if (confirm('삭제하시겠습니까?')) {
-      try {
-        await deleteInvoice(id); // 인보이스 삭제 API 호출
-        alert('인보이스가 삭제되었습니다.'); // 성공 메시지
-      } catch (error) {
-        console.error('삭제 중 오류 발생:', error);
-        alert('인보이스 삭제에 실패했습니다.'); // 오류 메시지
-      }
+      await deleteInvoice(id);
     }
   };
 

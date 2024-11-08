@@ -25,7 +25,7 @@ export default function HomePage() {
             , brought to you by Vercel.
           </p>
           <Link
-            href="/dashboard"
+            href="/login"
             className="flex h-[48px] items-center gap-5 bg-point-color2 rounded-lg text-white px-3 py-6"
           >
             Log in
